@@ -1,0 +1,122 @@
+os.makedirs(RAW_PATH, exist_ok=True)
+This line ensures that the directory defined by RAW_PATH exists before the program attempts to write any raw data files into it.
+os.makedirs() creates a directory and any missing parent directories in the given path.
+RAW_PATH is the location where raw API responses (JSON files) will be stored as part of the raw data layer.
+exist_ok=True tells Python not to raise an error if the directory already exists.
+-----------------------------------------------------------------------
+
+def fetch_api(endpoint: str) -> dict:
+    url = f"{BASE_URL.rstrip('/')}/{endpoint.lstrip('/')}"
+    response = requests.get(url, timeout=10)
+    response.raise_for_status()
+    return response.json()
+Defines a reusable function named fetch_api that accepts a single argument:
+endpoint: A string representing the API endpoint path (for example, api/v1/pokemon_stats.json)
+The return type annotation -> dict indicates that the function is expected to return a parsed JSON object (either a dictionary or a list, depending on the API response)
+requests.get() retrieves data from the API
+timeout=10 ensures the request fails after 10 seconds if the server does not respond
+Checks the HTTP response status code and raises an exception if the request failed.
+Automatically raises an error for:
+Client errors (4xx)
+Server errors (5xx)
+Parses the API response body from JSON into native Python data structures.
+Converts the response into a dictionary or list
+Returns structured data that can be processed downstream
+-----------------------------------------------------------------------
+
+def save_raw_json(name: str, data: dict):
+    filename = os.path.join(RAW_PATH, f"{name}_{datetime.now().strftime('%Y%m%d%H%M%S')}.json")
+    with open(filename, "w") as f:
+        json.dump(data, f, indent=2)
+Defines a function named save_raw_json that accepts:
+name: A string identifier for the dataset (for example, "pokemon_stats")
+data: The raw JSON data returned by the API
+The function does not return anything; its sole responsibility is data persistence.
+os.path.join() safely concatenates directory paths in an OS-independent way
+RAW_PATH is the directory where raw data is stored
+name identifies which dataset the file represents
+datetime.now().strftime('%Y%m%d%H%M%S') appends a timestamp in YYYYMMDDHHMMSS format
+.json ensures the file is saved in JSON format
+Opens the file in write mode using a context manager
+Serializes the Python object data into JSON format and writes it to the file.
+json.dump() converts Python dictionaries/lists into valid JSON
+indent=2 formats the output for human readability
+------------------------------------------------------------------------
+
+def md5_hash(*args)-> str:
+    return hashlib.md5("|".join(map(str, args)).encode()).hexdigest()
+This utility function generates a deterministic MD5 hash from one or more input values.
+It is used to create stable surrogate keys for entities where no single natural primary key exists.
+Defines a function named md5_hash that accepts a variable number of arguments.
+*args allows the function to take any number of input values
+Inputs can be integers, strings, or other basic data types
+The return type annotation -> str indicates the function returns a hexadecimal string.
+map(str, args) converts all input values to strings to ensure consistent hashing
+"|".join(...) concatenates the values using a delimiter (|) to preserve field boundaries
+.encode() converts the string into bytes, which is required by the MD5 algorithm
+hashlib.md5(...) computes the MD5 hash
+.hexdigest() converts the binary hash into a readable hexadecimal string
+------------------------------------------------------------------------
+
+def flatten_single_list_dict(data: dict, prefix_map=None) -> dict:
+    row = {}
+    prefix_map = prefix_map or {}
+    for key, value in data.items():
+        if isinstance(value, list) and len(value) == 1 and isinstance(value[0], dict):
+            prefix = prefix_map.get(key, f"{key}_")
+            for k, v in value[0].items():
+                row[f"{prefix}{k}"] = v
+        else:
+            row[key] = value
+    return row
+This utility function flattens nested API fields that are represented as a list containing a single dictionary.
+It converts semi-structured JSON into a tabular-friendly format suitable for analytics and relational databases.
+Defines a function that accepts:
+data: A dictionary representing a single API record
+prefix_map: An optional dictionary used to control column name prefixes when flattening
+Iterates over each field in the input dictionary.
+Each key-value pair represents:
+A top-level JSON field returned by the API
+Potentially nested or flat data
+Checks for a very specific and intentional structure:
+The value is a list
+The list contains exactly one element
+That element is a dictionary
+Determines the column name prefix to use when flattening nested fields.
+Uses a custom prefix if defined in prefix_map
+Defaults to <parent_key>_ if no override is provided
+Flattens the inner dictionary by:
+Iterating over its key-value pairs
+Creating new top-level keys using the prefix
+Assigning the nested values directly to the output row
+Handles all other cases:
+Non-list values
+Lists with multiple elements
+Values that should remain unchanged
+------------------------------------------------------------------------
+
+raw_data = {}
+for name, endpoint in ENDPOINTS.items():
+    try:
+        data = fetch_api(endpoint)
+        save_raw_json(name, data)
+        raw_data[name]=data
+        print(f"[RAW] Loaded {name} ({len(data) if isinstance(data,list) else 1} records)")
+    except Exception as e:
+            print(f"[RAW] Failed {name}: {e}")
+This block orchestrates the raw data ingestion process by fetching data from multiple API endpoints, persisting the raw responses to disk, and storing them in memory for downstream processing.
+Initializes an empty dictionary to store raw API responses in memory.
+Iterates over all API endpoints defined in the ENDPOINTS configuration dictionary.
+name is a logical identifier for the dataset (e.g., "pokemon", "stats")
+endpoint is the corresponding API path
+Fetches raw data from the API using the utility function fetch_api.
+Persists the raw API response to disk as a timestamped JSON file.
+Stores the raw API response in the in-memory raw_data dictionary.
+This block coordinates resilient raw data ingestion by fetching API data, persisting immutable raw snapshots, and caching results for downstream processing.
+------------------------------------------------------------------------
+
+
+
+
+
+
