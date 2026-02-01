@@ -282,9 +282,9 @@
   "released_pokemon.json": {
     "api_filename": "released_pokemon.json",
     "full_path": "/api/v1/released_pokemon.json",
-    "hash_md5": "4006bd183259ebad6470bd0d1f925f93",
-    "hash_sha1": "6b96a4c5a30aa0a9fc9df14b867cab8a16514bde",
-    "hash_sha256": "0a14cd6248a5bae1ee22f7c9384da0061e33fb9c494b0b7f81687c921cc606d0"
+    "hash_md5": "fea817c08174f09ee5ffa3ea41797d9d",
+    "hash_sha1": "5fe23b1ea6c7a98f14b43a77af7d0c7ad69d6f0c",
+    "hash_sha256": "740d9a03ed6853023e89912cc31b2c3fa513582b091ee301cdf31a35794cc58d"
   },
   "research_task_exclusive_pokemon.json": {
     "api_filename": "research_task_exclusive_pokemon.json",
@@ -303,9 +303,9 @@
   "shiny_pokemon.json": {
     "api_filename": "shiny_pokemon.json",
     "full_path": "/api/v1/shiny_pokemon.json",
-    "hash_md5": "1901bb3d5e9571d3933fd0abbabf2641",
-    "hash_sha1": "b0fe90a5f58e63ead8741b30f85b3861236e2e79",
-    "hash_sha256": "c0b4681c904cf8157f8d66ec2522f95565f9ca7304b36852c399274dd8ed7701"
+    "hash_md5": "16914a239d7bf1cd4a2d09e5b0b3ca8a",
+    "hash_sha1": "840031ac042f63b70db3edf032f0af6dd8c42d11",
+    "hash_sha256": "6697d100d4f941c1ddf542f2c3468d94a801ee93b2af621ca37a59a415fa62d4"
   },
   "time_limited_shiny_pokemon.json": {
     "api_filename": "time_limited_shiny_pokemon.json",

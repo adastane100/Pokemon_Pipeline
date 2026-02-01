@@ -6437,6 +6437,16 @@
     "id": 646,
     "name": "Kyurem"
   },
+  "647": {
+    "found_egg": false,
+    "found_evolution": false,
+    "found_photobomb": true,
+    "found_raid": false,
+    "found_research": true,
+    "found_wild": true,
+    "id": 647,
+    "name": "Keldeo"
+  },
   "648": {
     "found_egg": false,
     "found_evolution": false,
@@ -7177,6 +7187,36 @@
     "id": 730,
     "name": "Primarina"
   },
+  "731": {
+    "found_egg": false,
+    "found_evolution": false,
+    "found_photobomb": true,
+    "found_raid": false,
+    "found_research": true,
+    "found_wild": true,
+    "id": 731,
+    "name": "Pikipek"
+  },
+  "732": {
+    "found_egg": false,
+    "found_evolution": true,
+    "found_photobomb": true,
+    "found_raid": false,
+    "found_research": true,
+    "found_wild": true,
+    "id": 732,
+    "name": "Trumbeak"
+  },
+  "733": {
+    "found_egg": false,
+    "found_evolution": true,
+    "found_photobomb": true,
+    "found_raid": false,
+    "found_research": true,
+    "found_wild": true,
+    "id": 733,
+    "name": "Toucannon"
+  },
   "734": {
     "found_egg": false,
     "found_evolution": false,
@@ -7577,6 +7617,16 @@
     "id": 780,
     "name": "Drampa"
   },
+  "781": {
+    "found_egg": false,
+    "found_evolution": false,
+    "found_photobomb": true,
+    "found_raid": false,
+    "found_research": true,
+    "found_wild": true,
+    "id": 781,
+    "name": "Dhelmise"
+  },
   "782": {
     "found_egg": false,
     "found_evolution": false,
@@ -7766,6 +7816,36 @@
     "found_wild": true,
     "id": 809,
     "name": "Melmetal"
+  },
+  "810": {
+    "found_egg": false,
+    "found_evolution": false,
+    "found_photobomb": true,
+    "found_raid": false,
+    "found_research": true,
+    "found_wild": true,
+    "id": 810,
+    "name": "Grookey"
+  },
+  "811": {
+    "found_egg": false,
+    "found_evolution": true,
+    "found_photobomb": true,
+    "found_raid": false,
+    "found_research": true,
+    "found_wild": true,
+    "id": 811,
+    "name": "Thwackey"
+  },
+  "812": {
+    "found_egg": false,
+    "found_evolution": true,
+    "found_photobomb": true,
+    "found_raid": false,
+    "found_research": true,
+    "found_wild": true,
+    "id": 812,
+    "name": "Rillaboom"
   },
   "819": {
     "found_egg": false,
@@ -8287,6 +8367,26 @@
     "id": 925,
     "name": "Maushold"
   },
+  "926": {
+    "found_egg": false,
+    "found_evolution": false,
+    "found_photobomb": true,
+    "found_raid": false,
+    "found_research": true,
+    "found_wild": true,
+    "id": 926,
+    "name": "Fidough"
+  },
+  "927": {
+    "found_egg": false,
+    "found_evolution": true,
+    "found_photobomb": true,
+    "found_raid": false,
+    "found_research": true,
+    "found_wild": true,
+    "id": 927,
+    "name": "Dachsbun"
+  },
   "928": {
     "found_egg": false,
     "found_evolution": false,
@@ -8346,6 +8446,26 @@
     "found_wild": true,
     "id": 937,
     "name": "Ceruledge"
+  },
+  "938": {
+    "found_egg": false,
+    "found_evolution": false,
+    "found_photobomb": true,
+    "found_raid": false,
+    "found_research": true,
+    "found_wild": true,
+    "id": 938,
+    "name": "Tadbulb"
+  },
+  "939": {
+    "found_egg": false,
+    "found_evolution": true,
+    "found_photobomb": true,
+    "found_raid": false,
+    "found_research": true,
+    "found_wild": true,
+    "id": 939,
+    "name": "Bellibolt"
   },
   "957": {
     "found_egg": false,

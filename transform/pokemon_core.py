@@ -34,7 +34,7 @@ def transform_shiny(raw_data: Dict[str, Any]) -> pd.DataFrame:
     return (
         pd.DataFrame.from_dict(raw_data["shiny_pokemons"], orient="index")
         .rename(columns={"id": "pokemon_id"})
-        .pipe(flag_column, "shiny_pokemon")
+        #.pipe(flag_column, "shiny_pokemon")
         .reset_index(drop=True)
     )
 
@@ -102,4 +102,4 @@ def transform_forms(raw_data: Dict[str, Any]) -> pd.DataFrame:
             range(len(raw_data.get("pokemon_forms"))),
             name="form_id"
         )
-    )
+    ).reset_index()

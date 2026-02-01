@@ -8,17 +8,10 @@ from utils.common import md5_hash
 def transform_pokemon_stats(raw_data: Dict[str, Any]) -> pd.DataFrame:
     df = pd.DataFrame(raw_data["pokemon_stats"])
 
-    core = (
-        df.drop(columns=["form"], errors="ignore")
-        .drop_duplicates(
-            subset=["pokemon_id", "base_attack", "base_defense", "base_stamina"]
-        )
-        .reset_index(drop=True)
-    )
-
-    core["pokemon_stat_profile_id"] = core.apply(
+    df["pokemon_stat_profile_id"] = df.apply(
         lambda x: md5_hash(
             x["pokemon_id"],
+            x["form"],
             x["base_attack"],
             x["base_defense"],
             x["base_stamina"],
@@ -26,24 +19,21 @@ def transform_pokemon_stats(raw_data: Dict[str, Any]) -> pd.DataFrame:
         axis=1,
     )
 
-    return core
+    return df
 
 
 def transform_pokemon_max_cp(raw_data: Dict[str, Any]) -> pd.DataFrame:
     df = pd.DataFrame(raw_data["pokemon_max_cp"])
 
-    core = (
-        df.drop(columns=["form"], errors="ignore")
-        .drop_duplicates(subset=["pokemon_id", "max_cp"])
-        .reset_index(drop=True)
-    )
-
-    core["pokemon_max_cp_profile_id"] = core.apply(
-        lambda x: md5_hash(x["pokemon_id"], x["max_cp"]),
+    df["pokemon_max_cp_profile_id"] = df.apply(
+        lambda x: md5_hash(
+            x["pokemon_id"],
+            x["form"],
+            x["max_cp"]),
         axis=1,
     )
 
-    return core
+    return df
 
 
 def transform_pokemon_types(raw_data: Dict[str, Any]) -> pd.DataFrame:

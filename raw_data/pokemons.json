@@ -3279,6 +3279,18 @@
     "id": 836,
     "name": "Boltund"
   },
+  "837": {
+    "id": 837,
+    "name": "Rolycoly"
+  },
+  "838": {
+    "id": 838,
+    "name": "Carkol"
+  },
+  "839": {
+    "id": 839,
+    "name": "Coalossal"
+  },
   "840": {
     "id": 840,
     "name": "Applin"
@@ -3302,6 +3314,14 @@
   "851": {
     "id": 851,
     "name": "Centiskorch"
+  },
+  "852": {
+    "id": 852,
+    "name": "Clobbopus"
+  },
+  "853": {
+    "id": 853,
+    "name": "Grapploct"
   },
   "855": {
     "id": 855,
@@ -3551,6 +3571,18 @@
     "id": 930,
     "name": "Arboliva"
   },
+  "932": {
+    "id": 932,
+    "name": "Nacli"
+  },
+  "933": {
+    "id": 933,
+    "name": "Naclstack"
+  },
+  "934": {
+    "id": 934,
+    "name": "Garganacl"
+  },
   "935": {
     "id": 935,
     "name": "Charcadet"
@@ -3571,6 +3603,14 @@
     "id": 939,
     "name": "Bellibolt"
   },
+  "940": {
+    "id": 940,
+    "name": "Wattrel"
+  },
+  "941": {
+    "id": 941,
+    "name": "Kilowattrel"
+  },
   "944": {
     "id": 944,
     "name": "Shroodle"
@@ -3586,6 +3626,10 @@
   "949": {
     "id": 949,
     "name": "Toedscruel"
+  },
+  "950": {
+    "id": 950,
+    "name": "Klawf"
   },
   "957": {
     "id": 957,
@@ -3618,6 +3662,14 @@
   "966": {
     "id": 966,
     "name": "Revavroom"
+  },
+  "969": {
+    "id": 969,
+    "name": "Glimmet"
+  },
+  "970": {
+    "id": 970,
+    "name": "Glimmora"
   },
   "971": {
     "id": 971,

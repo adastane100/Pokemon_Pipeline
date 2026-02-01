@@ -1,5 +1,9 @@
 import hashlib
-from typing import Dict, Any
+import pandas as pd
+from typing import Dict, Any, List
+from pathlib import Path
+from sqlalchemy import text
+from config.config import DB_SCHEMA, DB_CHUNK_SIZE
 
 def md5_hash(*args)->str:
     #Generate MD5 hash from multiple values
@@ -44,3 +48,40 @@ def safe_str(value:Any)->str:
     if value is None:
         return ""
     return str(value).lower().strip()
+
+def merge_on_key(base_df: pd.DataFrame, tables: List[pd.DataFrame], key:str = "pokemon_id" ) -> pd.DataFrame:
+    
+    result = base_df.copy()
+    for table in tables:
+        # Only bring columns that do NOT already exist
+        new_cols = [c for c in table.columns if c not in result.columns]
+        if key not in new_cols:
+            new_cols = [key] + new_cols
+
+        result = result.merge(
+            table[new_cols],
+            on=key,
+            how="left")
+    return result
+
+def merge_on_keys(base_df:pd.DataFrame, tables: List[tuple]) -> pd.DataFrame:
+
+    result=base_df.copy()
+    for table, keys in tables:
+        if isinstance(keys, dict):
+            result = result.merge(
+                table,
+                left_on=list(keys.keys()),
+                right_on=list(keys.values()),
+                how="left"
+            )
+        else:
+            result = result.merge(table, on=keys, how="left")
+    return result
+
+def save_cache(df, path: str):
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    df.to_parquet(path, index=False)
+
+def load_cache(path: str):
+    return pd.read_parquet(path) if Path(path).exists() else None
