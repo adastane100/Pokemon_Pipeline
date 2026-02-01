@@ -3,7 +3,7 @@ from typing import List, Dict, Any
 #from utils.common import merge_on_key, merge_on_keys
 
 
-def analytics(core_tables:Dict)-> List[pd.DataFrame]:
+def analytics(core_tables:Dict[str,pd.DataFrame])-> Dict[str,pd.DataFrame]:
 
     dim_pokemon = (
         core_tables['pokemon_generations']
@@ -112,7 +112,20 @@ def analytics(core_tables:Dict)-> List[pd.DataFrame]:
         how="left"
         )
         )
+    dim_fast_moves = (
+        core_tables["pvp_fast_moves"]
+    )
+
+    dim_charged_moves = (
+        core_tables["pvp_charged_moves"]
+    )
     
-    return dim_pokemon, dim_pokemon_form_stats
+    return { 
+        "dim_pokemon":dim_pokemon,
+        "dim_pokemon_form_stats":dim_pokemon_form_stats,
+        "dim_fast_moves":dim_fast_moves,
+        "dim_charged_moves":dim_charged_moves
+
+    }
 
 

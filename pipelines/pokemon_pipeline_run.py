@@ -23,7 +23,7 @@ def run_pipeline() -> None:
     core_tables = build_core_tables(raw_data)
 
     print("\n📊 Building analytics tables...")
-    dim_pokemon, dim_pokemon_form_stats = analytics(core_tables)
+    analytics_tables = analytics(core_tables)
 
     # --------------------------------------------------
     # LOAD
@@ -41,21 +41,15 @@ def run_pipeline() -> None:
             if_exists="replace"  # can later be "append"/"upsert"
         )
     
-        # ---- Load analytics tables ----
-    print("\n📈 Loading analytics tables...")
-    load_analytics_table(
-        df=dim_pokemon,
-        table_name="dim_pokemon",
-        engine=engine,
-        if_exists="replace"
-    )
 
-    load_analytics_table(
-        df=dim_pokemon_form_stats,
-        table_name="dim_pokemon_form_stats",
-        engine=engine,
-        if_exists="replace"
-    )
+    print("\n📈 Loading analytical tables...")
+    for table_name, df in analytics_tables.items():
+        load_analytics_table(
+            df=df,
+            table_name=table_name,
+            engine=engine,
+            if_exists="replace"  # can later be "append"/"upsert"
+        )
 
     print("\n✅ Pokémon Data Pipeline completed successfully!")
 
