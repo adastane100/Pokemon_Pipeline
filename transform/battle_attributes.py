@@ -17,10 +17,22 @@ def transform_weather_boost(raw_data: Dict[str, Any]) -> pd.DataFrame:
 
 
 def transform_type_effectiveness(raw_data: Dict[str, Any]) -> pd.DataFrame:
+    damage_map = {
+    1.6: "super effective",
+    1.0: "neutral",
+    0.625: "not very effective",
+    0.39: "resistant"
+    }
     return (
-        pd.DataFrame.from_dict(raw_data["type_effectiveness"], orient="index")
+        pd.DataFrame.from_dict(raw_data["type_effectiveness"])
         .reset_index()
-        .rename(columns={"index": "type"})
+        .melt(
+            id_vars="index",
+            var_name="defending_type",
+            value_name="effectiveness"
+        )
+        .rename(columns={"index": "attacking_type"})
+        .assign(damage_effectiveness=lambda df: df["effectiveness"].map(damage_map))
     )
 
 

@@ -119,12 +119,17 @@ def analytics(core_tables:Dict[str,pd.DataFrame])-> Dict[str,pd.DataFrame]:
     dim_charged_moves = (
         core_tables["pvp_charged_moves"]
     )
+
+    dim_type_effectiveness = (
+        core_tables['type_effectiveness']
+    )
     
     return { 
         "dim_pokemon":dim_pokemon,
         "dim_pokemon_form_stats":dim_pokemon_form_stats,
         "dim_fast_moves":dim_fast_moves,
-        "dim_charged_moves":dim_charged_moves
+        "dim_charged_moves":dim_charged_moves,
+        "dim_type_effectiveness":dim_type_effectiveness
 
     }
 
